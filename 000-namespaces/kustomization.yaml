@@ -1,0 +1,7 @@
+commonLabels:
+  region: staging
+bases:
+- ../../../../github.com/yuanying/k8s-base/000-namespaces
+resources:
+- ddns.yaml
+
