@@ -1,0 +1,24 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: update-ddns
+spec:
+  schedule: "12 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: update-ddns
+            image: yuanying/sshd:v0.1.0
+            args:
+            - "/bin/sh"
+            - "-ec"
+            - |
+              curl "http://dyn.value-domain.com/cgi-bin/dyn.fcg?d=unstable.cloud&p=${DDNS_UNSTABLE_PASSWORD}&h=*"
+              sleep 10
+              curl "http://dyn.value-domain.com/cgi-bin/dyn.fcg?d=unstable.cloud&p=${DDNS_UNSTABLE_PASSWORD}&h=@"
+            envFrom:
+            - secretRef:
+                name: ddns
+          restartPolicy: OnFailure

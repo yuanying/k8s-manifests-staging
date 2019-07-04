@@ -1,0 +1,14 @@
+commonLabels:
+  region: staging
+  app: ddns
+namespace: ddns
+resources:
+- src.yaml
+secretGenerator:
+- name: ddns
+  envs:
+  - secrets/ddns.env.txt
+  type: Opaque
+generatorOptions:
+   disableNameSuffixHash: true
+
