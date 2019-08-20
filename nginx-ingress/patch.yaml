@@ -3,5 +3,4 @@ kind: Service
 metadata:
   name: ing-nginx-ingress-controller
 spec:
-  clusterIP: ""
   loadBalancerIP: "172.18.14.200"
