@@ -1,0 +1,12 @@
+commonLabels:
+  region: staging
+  app: kuard
+bases:
+- ../../../../github.com/yuanying/k8s-base/kuard
+patchesJson6902:
+- target:
+    group: networking.k8s.io
+    version: v1beta1
+    kind: Ingress
+    name: kuard
+  path: patch.json
