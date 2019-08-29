@@ -18,6 +18,10 @@ spec:
               curl "http://dyn.value-domain.com/cgi-bin/dyn.fcg?d=unstable.cloud&p=${DDNS_UNSTABLE_PASSWORD}&h=*"
               sleep 10
               curl "http://dyn.value-domain.com/cgi-bin/dyn.fcg?d=unstable.cloud&p=${DDNS_UNSTABLE_PASSWORD}&h=@"
+              sleep 10
+              curl "http://dyn.value-domain.com/cgi-bin/dyn.fcg?d=lazy.work&p=${DDNS_LAZY_PASSWORD}&h=*"
+              sleep 10
+              curl "http://dyn.value-domain.com/cgi-bin/dyn.fcg?d=lazy.work&p=${DDNS_LAZY_PASSWORD}&h=@"
             envFrom:
             - secretRef:
                 name: ddns
