@@ -2,3 +2,5 @@ commonLabels:
   region: staging
 bases:
 - ../../../../github.com/yuanying/k8s-base/istio
+patches:
+- path: patch.yaml
