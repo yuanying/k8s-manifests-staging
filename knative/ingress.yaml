@@ -30,3 +30,6 @@ spec:
       - backend:
           serviceName: istio-ingressgateway
           servicePort: 443
+  tls:
+  - hosts:
+    - "*.unstable.cloud"
