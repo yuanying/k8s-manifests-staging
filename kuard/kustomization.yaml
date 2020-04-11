@@ -2,7 +2,7 @@ commonLabels:
   region: staging
   app: kuard
 bases:
-- ../../../../github.com/yuanying/k8s-base/kuard
+- ../base/kuard
 patchesJson6902:
 - target:
     group: networking.k8s.io

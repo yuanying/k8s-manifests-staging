@@ -2,6 +2,6 @@ commonLabels:
   region: staging
   app: nginx-ingress
 bases:
-- ../../../../github.com/yuanying/k8s-base/nginx-ingress
+- ../base/nginx-ingress
 patches:
 - path: patch.yaml

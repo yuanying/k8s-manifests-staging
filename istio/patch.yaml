@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: istio-ingressgateway
-  namespace: istio-system
-spec:
-  loadBalancerIP: "172.18.14.201"

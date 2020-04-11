@@ -1,4 +1,0 @@
-commonLabels:
-  region: staging
-bases:
-- ../../../../../github.com/yuanying/k8s-base/istio/crd

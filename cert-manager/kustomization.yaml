@@ -2,4 +2,4 @@ commonLabels:
   region: staging
   app: cert-manager
 bases:
-- ../../../../github.com/yuanying/k8s-base/cert-manager
+- ../base/cert-manager
