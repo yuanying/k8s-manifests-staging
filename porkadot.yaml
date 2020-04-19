@@ -47,7 +47,7 @@ cni:
     backend: host-gw
 
 kubernetes:
-  kubernetes_version: v1.15.11
+  kubernetes_version: v1.16.9
   cluster_name: unstable
   control_plane_endpoint: '172.18.13.101:6443'
 
