@@ -46,8 +46,11 @@ cni:
   flannel:
     backend: host-gw
 
+etcd:
+  image_tag: v3.4.3
+
 kubernetes:
-  kubernetes_version: v1.16.9
+  kubernetes_version: v1.17.5
   cluster_name: unstable
   control_plane_endpoint: '172.18.13.101:6443'
 
