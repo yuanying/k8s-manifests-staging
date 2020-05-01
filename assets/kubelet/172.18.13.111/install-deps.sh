@@ -32,7 +32,7 @@ ETCD_URL=https://storage.googleapis.com/etcd/${ETCD_VER}/etcd-${ETCD_VER}-linux-
 ETCD_TMP=$(mktemp -d)
 
 curl -L ${ETCD_URL} -o ${ETCD_TMP}/etcd.tar.gz
-tar zxvf -C ${ETCD_TMP}/ --strip-components=1 ${ETCD_TMP}/etcd.tar.gz
+tar zxvf ${ETCD_TMP}/etcd.tar.gz -C ${ETCD_TMP}/ --strip-components=1
 chmod +x ${ETCD_TMP}/etcdctl
 rm -f /opt/bin/etcdctl
 mv ${ETCD_TMP}/etcdctl /opt/bin/etcdctl-${ETCD_VER}

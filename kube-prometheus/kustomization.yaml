@@ -1,0 +1,9 @@
+resources:
+- ../base/kube-prometheus/
+
+configMapGenerator:
+- name: kp-config
+  namespace: monitoring
+  behavior: merge
+  literals:
+  - DOMAIN=unstable.cloud
