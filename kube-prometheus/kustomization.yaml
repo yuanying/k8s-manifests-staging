@@ -7,3 +7,10 @@ configMapGenerator:
   behavior: merge
   literals:
   - DOMAIN=unstable.cloud
+
+secretGenerator:
+- name: alertmanager-main
+  namespace: monitoring
+  behavior: merge
+  files:
+  - secrets/alertmanager.yaml
