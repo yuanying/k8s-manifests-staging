@@ -1,0 +1,5 @@
+commonLabels:
+  region: staging
+resources:
+- ../base/nfsd
+
