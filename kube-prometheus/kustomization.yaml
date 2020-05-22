@@ -1,6 +1,9 @@
 resources:
 - ../base/kube-prometheus/
 
+generatorOptions:
+  disableNameSuffixHash: true
+
 configMapGenerator:
 - name: kp-config
   namespace: monitoring
@@ -14,3 +17,7 @@ secretGenerator:
   behavior: merge
   files:
   - secrets/alertmanager.yaml
+- name: basic-auth
+  namespace: monitoring
+  files:
+  - secrets/auth
