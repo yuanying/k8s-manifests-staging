@@ -27,7 +27,6 @@ nodes:
       "storage.zfs":
       "tgtd.unstable.cloud/storage": ""
     taints:
-      "dedicated": "nfs:NoSchedule"
       "tgtd.unstable.cloud/storage": ":NoSchedule"
 
 bootstrap:
