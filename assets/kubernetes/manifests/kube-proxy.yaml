@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/instance: kube-proxy-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-proxy
-    app.kubernetes.io/version: v1.17.5
+    app.kubernetes.io/version: v1.19.6
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-proxy
 roleRef:
@@ -30,7 +30,7 @@ metadata:
     app.kubernetes.io/instance: kube-proxy-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-proxy
-    app.kubernetes.io/version: v1.17.5
+    app.kubernetes.io/version: v1.19.6
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-proxy
 ---
@@ -44,7 +44,7 @@ metadata:
     app.kubernetes.io/instance: kube-proxy-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-proxy
-    app.kubernetes.io/version: v1.17.5
+    app.kubernetes.io/version: v1.19.6
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-proxy
 data:
@@ -79,7 +79,7 @@ data:
       scheduler: ''
       syncPeriod: 30s
     metricsBindAddress: 127.0.0.1:10249
-    mode: ipvs
+    mode: iptables
     nodePortAddresses: 
     oomScoreAdj: -999
     portRange: ''
@@ -92,7 +92,7 @@ data:
     clusters:
     - cluster:
         certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        server: https://172.18.13.101:6443
+        server: https://192.168.1.96:6443
       name: default
     contexts:
     - context:
@@ -114,7 +114,7 @@ metadata:
     app.kubernetes.io/instance: kube-proxy-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-proxy
-    app.kubernetes.io/version: v1.17.5
+    app.kubernetes.io/version: v1.19.6
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-proxy
   name: kube-proxy
@@ -132,7 +132,7 @@ spec:
         app.kubernetes.io/instance: kube-proxy-porkadot
         app.kubernetes.io/managed-by: porkadot
         app.kubernetes.io/name: kube-proxy
-        app.kubernetes.io/version: v1.17.5
+        app.kubernetes.io/version: v1.19.6
         app.kubernetes.io/part-of: kubernetes
         k8s-app: kube-proxy
       annotations:
@@ -140,7 +140,7 @@ spec:
     spec:
       containers:
       - name: kube-proxy
-        image: k8s.gcr.io/kube-proxy:v1.17.5
+        image: k8s.gcr.io/kube-proxy:v1.19.6
         imagePullPolicy: IfNotPresent
         command:
         - kube-proxy

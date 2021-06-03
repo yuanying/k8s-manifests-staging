@@ -48,7 +48,7 @@ sed -i -e "/containerd.runtimes.runc.options/a SystemdCgroup = true" /etc/contai
 systemctl restart containerd
 
 cat <<EOF > /etc/iscsi/initiatorname.iscsi
-InitiatorName=iqn.2020-04.cloud.unstable:192.168.1.95
+InitiatorName=iqn.2020-04.cloud.unstable:192.168.1.91
 EOF
 
 systemctl restart iscsid.service

@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: kube-apiserver-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-apiserver
-    app.kubernetes.io/version: v1.17.5
+    app.kubernetes.io/version: v1.19.6
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-apiserver
 spec:
@@ -25,7 +25,7 @@ spec:
         app.kubernetes.io/instance: kube-apiserver-porkadot
         app.kubernetes.io/managed-by: porkadot
         app.kubernetes.io/name: kube-apiserver
-        app.kubernetes.io/version: v1.17.5
+        app.kubernetes.io/version: v1.19.6
         app.kubernetes.io/part-of: kubernetes
         k8s-app: kube-apiserver
       annotations:
@@ -36,7 +36,7 @@ spec:
         resources:
           requests:
             cpu: 250m
-        image: k8s.gcr.io/kube-apiserver:v1.17.5
+        image: k8s.gcr.io/kube-apiserver:v1.19.6
         command:
         - kube-apiserver
         - --advertise-address=$(POD_IP)
@@ -48,7 +48,7 @@ spec:
         - --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
         - --etcd-certfile=/etc/kubernetes/pki/etcd/etcd-client.crt
         - --etcd-keyfile=/etc/kubernetes/pki/etcd/etcd-client.key
-        - --etcd-servers=https://172.18.13.111:2379,https://172.18.13.112:2379,https://172.18.13.113:2379
+        - --etcd-servers=https://192.168.1.91:2379,https://192.168.1.92:2379,https://192.168.1.93:2379
         - --kubelet-certificate-authority=/etc/kubernetes/pki/kubernetes/ca.crt
         - --kubelet-client-certificate=/etc/kubernetes/pki/kubernetes/kubelet-client.crt
         - --kubelet-client-key=/etc/kubernetes/pki/kubernetes/kubelet-client.key
