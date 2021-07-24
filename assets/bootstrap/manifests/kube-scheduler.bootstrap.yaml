@@ -18,11 +18,11 @@ spec:
     image: k8s.gcr.io/kube-scheduler:v1.19.6
     command:
     - kube-scheduler
+    - --leader-elect=true
+    - --v=2
     - --kubeconfig=/etc/kubernetes/bootstrap/kubeconfig-bootstrap.yaml
     - --authentication-kubeconfig=/etc/kubernetes/bootstrap/kubeconfig-bootstrap.yaml
     - --authorization-kubeconfig=/etc/kubernetes/bootstrap/kubeconfig-bootstrap.yaml
-    - --leader-elect=true
-    - --v=2
     volumeMounts:
     - name: kubernetes
       mountPath: /etc/kubernetes
