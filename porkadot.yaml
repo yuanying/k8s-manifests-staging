@@ -44,7 +44,6 @@ etcd: {}
   #   value: 'arm64'
 
 kubernetes:
-  kubernetes_version: v1.19.6
   cluster_name: unstable
   control_plane_endpoint: '192.168.1.96:6443'
 
