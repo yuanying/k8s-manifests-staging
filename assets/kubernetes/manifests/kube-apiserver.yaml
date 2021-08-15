@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: kube-apiserver-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-apiserver
-    app.kubernetes.io/version: v1.20.3
+    app.kubernetes.io/version: v1.21.3
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-apiserver
 spec:
@@ -25,7 +25,7 @@ spec:
         app.kubernetes.io/instance: kube-apiserver-porkadot
         app.kubernetes.io/managed-by: porkadot
         app.kubernetes.io/name: kube-apiserver
-        app.kubernetes.io/version: v1.20.3
+        app.kubernetes.io/version: v1.21.3
         app.kubernetes.io/part-of: kubernetes
         k8s-app: kube-apiserver
       annotations:
@@ -36,7 +36,7 @@ spec:
         resources:
           requests:
             cpu: 250m
-        image: k8s.gcr.io/kube-apiserver:v1.20.3
+        image: k8s.gcr.io/kube-apiserver:v1.21.3
         command:
         - kube-apiserver
         - --advertise-address=$(POD_IP)
@@ -65,7 +65,7 @@ spec:
         - --service-account-issuer=https://kubernetes.default.svccluster.local
         - --service-account-key-file=/etc/kubernetes/pki/kubernetes/sa.pub
         - --service-account-signing-key-file=/etc/kubernetes/pki/kubernetes/sa.key
-        - --service-cluster-ip-range=10.254.0.0/24
+        - --service-cluster-ip-range=10.254.0.0/24,fd90:cca6:9762:96::/108
         - --storage-backend=etcd3
         - --tls-cert-file=/etc/kubernetes/pki/kubernetes/apiserver.crt
         - --tls-private-key-file=/etc/kubernetes/pki/kubernetes/apiserver.key

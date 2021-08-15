@@ -126,6 +126,8 @@ data:
   net-conf.json: |
     {
       "Network": "10.244.0.0/16",
+      "EnableIPv6": true,
+      "IPv6Network": "fd49:d591:8c7e::/48",
       "Backend": {
         "Type": "host-gw"
       }
@@ -166,7 +168,8 @@ spec:
       serviceAccountName: flannel
       initContainers:
       - name: install-cni
-        image: quay.io/coreos/flannel:v0.14.0
+        image: ghcr.io/yuanying/flannel:0.14.y09
+        imagePullPolicy: Always
         command:
         - cp
         args:
@@ -180,7 +183,8 @@ spec:
           mountPath: /etc/kube-flannel/
       containers:
       - name: kube-flannel
-        image: quay.io/coreos/flannel:v0.14.0
+        image: ghcr.io/yuanying/flannel:0.14.y09
+        imagePullPolicy: Always
         command:
         - /opt/bin/flanneld
         args:

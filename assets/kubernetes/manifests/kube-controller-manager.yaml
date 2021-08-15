@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: kube-controller-manager-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-controller-manager
-    app.kubernetes.io/version: v1.20.3
+    app.kubernetes.io/version: v1.21.3
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-controller-manager
 spec:
@@ -29,7 +29,7 @@ metadata:
     app.kubernetes.io/instance: kube-controller-manager-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-controller-manager
-    app.kubernetes.io/version: v1.20.3
+    app.kubernetes.io/version: v1.21.3
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-controller-manager
 roleRef:
@@ -51,7 +51,7 @@ metadata:
     app.kubernetes.io/instance: kube-controller-manager-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-controller-manager
-    app.kubernetes.io/version: v1.20.3
+    app.kubernetes.io/version: v1.21.3
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-controller-manager
 ---
@@ -65,7 +65,7 @@ metadata:
     app.kubernetes.io/instance: kube-controller-manager-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-controller-manager
-    app.kubernetes.io/version: v1.20.3
+    app.kubernetes.io/version: v1.21.3
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-controller-manager
 spec:
@@ -82,7 +82,7 @@ spec:
         app.kubernetes.io/instance: kube-controller-manager-porkadot
         app.kubernetes.io/managed-by: porkadot
         app.kubernetes.io/name: kube-controller-manager
-        app.kubernetes.io/version: v1.20.3
+        app.kubernetes.io/version: v1.21.3
         app.kubernetes.io/part-of: kubernetes
         k8s-app: kube-controller-manager
       annotations:
@@ -109,18 +109,18 @@ spec:
         resources:
           requests:
             cpu: 200m
-        image: k8s.gcr.io/kube-controller-manager:v1.20.3
+        image: k8s.gcr.io/kube-controller-manager:v1.21.3
         command:
         - kube-controller-manager
         - --allocate-node-cidrs=true
-        - --cluster-cidr=10.244.0.0/16
+        - --cluster-cidr=10.244.0.0/16,fd49:d591:8c7e::/48
         - --cluster-signing-cert-file=/etc/kubernetes/pki/kubernetes/ca.crt
         - --cluster-signing-key-file=/etc/kubernetes/pki/kubernetes/ca.key
         - --controllers=*,bootstrapsigner,tokencleaner
         - --leader-elect=true
-        - --node-cidr-mask-size=24
         - --root-ca-file=/etc/kubernetes/pki/kubernetes/ca.crt
         - --service-account-private-key-file=/etc/kubernetes/pki/kubernetes/sa.key
+        - --service-cluster-ip-range=10.254.0.0/24,fd90:cca6:9762:96::/108
         - --use-service-account-credentials=true
         - --v=2
         livenessProbe:
