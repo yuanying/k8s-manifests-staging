@@ -1,5 +1,5 @@
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodSecurityPolicy
 metadata:
   name: psp.flannel.unprivileged
@@ -126,6 +126,8 @@ data:
   net-conf.json: |
     {
       "Network": "10.244.0.0/16",
+      "EnableIPv6": true,
+      "IPv6Network": "fd49:d591:8c7e::/48",
       "Backend": {
         "Type": "host-gw"
       }
@@ -165,8 +167,20 @@ spec:
         effect: NoSchedule
       serviceAccountName: flannel
       initContainers:
+      - name: install-cni-plugin
+       #image: flannelcni/flannel-cni-plugin:v1.0.1 for ppc64le and mips64le (dockerhub limitations may apply)
+        image: rancher/mirrored-flannelcni-flannel-cni-plugin:v1.0.1:v1.0.1
+        command:
+        - cp
+        args:
+        - -f
+        - /flannel
+        - /opt/cni/bin/flannel
+        volumeMounts:
+        - name: cni-plugin
+          mountPath: /opt/cni/bin
       - name: install-cni
-        image: ghcr.io/yuanying/flannel:0.14.y09
+        image: rancher/mirrored-flannelcni-flannel:v0.17.0:v0.17.0
         command:
         - cp
         args:
@@ -180,7 +194,7 @@ spec:
           mountPath: /etc/kube-flannel/
       containers:
       - name: kube-flannel
-        image: ghcr.io/yuanying/flannel:0.14.y09
+        image: rancher/mirrored-flannelcni-flannel:v0.17.0:v0.17.0
         command:
         - /opt/bin/flanneld
         args:
@@ -188,11 +202,12 @@ spec:
         - --kube-subnet-mgr
         resources:
           requests:
-            cpu: "100m"
-            memory: "50Mi"
+            cpu: 100m
+            memory: 50Mi
           limits:
-            cpu: "100m"
-            memory: "50Mi"
+            cpu: 100m
+            memory: 50Mi
+
         securityContext:
           privileged: false
           capabilities:
@@ -211,13 +226,27 @@ spec:
           mountPath: /run/flannel
         - name: flannel-cfg
           mountPath: /etc/kube-flannel/
+        - name: ipam-data
+          mountPath: /var/lib/cni/networks
+        - name: xtables-lock
+          mountPath: /run/xtables.lock
       volumes:
       - name: run
         hostPath:
           path: /run/flannel
+      - name: cni-plugin
+        hostPath:
+          path: /opt/cni/bin
       - name: cni
         hostPath:
           path: /etc/cni/net.d
+      - name: ipam-data
+        hostPath:
+          path: /var/lib/cni/networks
       - name: flannel-cfg
         configMap:
           name: kube-flannel-cfg
+      - name: xtables-lock
+        hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate

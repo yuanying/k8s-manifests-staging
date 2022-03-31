@@ -13,6 +13,9 @@ metadata:
     k8s-app: kube-apiserver
 spec:
   hostNetwork: true
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
   containers:
   - name: kube-apiserver
     resources:
@@ -47,11 +50,40 @@ spec:
     - --service-account-issuer=https://kubernetes.default.svccluster.local
     - --service-account-key-file=/etc/kubernetes/pki/kubernetes/sa.pub
     - --service-account-signing-key-file=/etc/kubernetes/pki/kubernetes/sa.key
-    - --service-cluster-ip-range=10.254.0.0/24
+    - --service-cluster-ip-range=10.254.0.0/24,fd90:cca6:9762:96::/108
     - --storage-backend=etcd3
     - --tls-cert-file=/etc/kubernetes/pki/kubernetes/apiserver.crt
     - --tls-private-key-file=/etc/kubernetes/pki/kubernetes/apiserver.key
     - --v=2
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: 127.0.0.1
+        path: /livez
+        port: 6443
+        scheme: HTTPS
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 15
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        host: 127.0.0.1
+        path: /readyz
+        port: 6443
+        scheme: HTTPS
+      periodSeconds: 1
+      timeoutSeconds: 15
+    startupProbe:
+      failureThreshold: 24
+      httpGet:
+        host: 127.0.0.1
+        path: /livez
+        port: 6443
+        scheme: HTTPS
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 15
     env:
     - name: POD_IP
       valueFrom:

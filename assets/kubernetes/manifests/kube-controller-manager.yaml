@@ -1,5 +1,5 @@
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: kube-controller-manager
@@ -88,6 +88,11 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
     spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        runAsNonRoot: true
+        runAsUser: 65534
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -113,21 +118,33 @@ spec:
         command:
         - kube-controller-manager
         - --allocate-node-cidrs=true
-        - --cluster-cidr=10.244.0.0/16
+        - --cluster-cidr=10.244.0.0/16,fd49:d591:8c7e::/48
         - --cluster-signing-cert-file=/etc/kubernetes/pki/kubernetes/ca.crt
         - --cluster-signing-key-file=/etc/kubernetes/pki/kubernetes/ca.key
         - --controllers=*,bootstrapsigner,tokencleaner
         - --leader-elect=true
-        - --node-cidr-mask-size=24
         - --root-ca-file=/etc/kubernetes/pki/kubernetes/ca.crt
         - --service-account-private-key-file=/etc/kubernetes/pki/kubernetes/sa.key
+        - --service-cluster-ip-range=10.254.0.0/24,fd90:cca6:9762:96::/108
         - --use-service-account-credentials=true
         - --v=2
         livenessProbe:
+          failureThreshold: 8
           httpGet:
             path: /healthz
-            port: 10252  # Note: Using default port. Update if --port option is set differently.
-          initialDelaySeconds: 15
+            port: 10257
+            scheme: HTTPS
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 15
+        startupProbe:
+          failureThreshold: 24
+          httpGet:
+            path: /healthz
+            port: 10257
+            scheme: HTTPS
+          initialDelaySeconds: 10
+          periodSeconds: 10
           timeoutSeconds: 15
         volumeMounts:
         - name: var-run-kubernetes
@@ -149,9 +166,6 @@ spec:
       priorityClassName: system-cluster-critical
       nodeSelector:
         k8s.unstable.cloud/master: ""
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
       serviceAccountName: kube-controller-manager
       tolerations:
       - key: CriticalAddonsOnly
