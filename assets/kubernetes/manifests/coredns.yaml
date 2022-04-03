@@ -74,7 +74,7 @@ data:
             lameduck 5s
         }
         ready
-        kubernetes cluster.local  in-addr.arpa ip6.arpa {
+        kubernetes unstable.cluster  in-addr.arpa ip6.arpa {
             pods insecure
             fallthrough in-addr.arpa ip6.arpa
             ttl 30
@@ -196,7 +196,7 @@ metadata:
 spec:
   selector:
     k8s-app: kube-dns
-  clusterIP: 10.254.0.10
+  clusterIP: 10.253.0.10
   ports:
   - name: dns
     port: 53

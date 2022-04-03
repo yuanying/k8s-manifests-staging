@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/instance: kube-apiserver-porkadot-bootstrap
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-apiserver
-    app.kubernetes.io/version: v1.21.3
+    app.kubernetes.io/version: v1.22.8
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-apiserver
 spec:
@@ -21,7 +21,7 @@ spec:
     resources:
       requests:
         cpu: 250m
-    image: k8s.gcr.io/kube-apiserver:v1.21.3
+    image: k8s.gcr.io/kube-apiserver:v1.22.8
     command:
     - kube-apiserver
     - --advertise-address=$(POD_IP)
@@ -47,10 +47,10 @@ spec:
     - --requestheader-group-headers=X-Remote-Group
     - --requestheader-username-headers=X-Remote-User
     - --secure-port=6443
-    - --service-account-issuer=https://kubernetes.default.svccluster.local
+    - --service-account-issuer=https://kubernetes.default.svcunstable.cluster
     - --service-account-key-file=/etc/kubernetes/pki/kubernetes/sa.pub
     - --service-account-signing-key-file=/etc/kubernetes/pki/kubernetes/sa.key
-    - --service-cluster-ip-range=10.254.0.0/24,fd90:cca6:9762:96::/108
+    - --service-cluster-ip-range=10.253.0.0/24,fd90:cca6:9762:96::/108
     - --storage-backend=etcd3
     - --tls-cert-file=/etc/kubernetes/pki/kubernetes/apiserver.crt
     - --tls-private-key-file=/etc/kubernetes/pki/kubernetes/apiserver.key

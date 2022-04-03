@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: kube-scheduler-porkadot
     app.kubernetes.io/managed-by: porkadot
     app.kubernetes.io/name: kube-scheduler
-    app.kubernetes.io/version: v1.21.3
+    app.kubernetes.io/version: v1.22.8
     app.kubernetes.io/part-of: kubernetes
     k8s-app: kube-scheduler
 spec:
@@ -18,7 +18,7 @@ spec:
       type: RuntimeDefault
   containers:
   - name: kube-scheduler
-    image: k8s.gcr.io/kube-scheduler:v1.21.3
+    image: k8s.gcr.io/kube-scheduler:v1.22.8
     command:
     - kube-scheduler
     - --leader-elect=true

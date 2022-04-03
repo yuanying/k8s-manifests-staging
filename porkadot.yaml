@@ -52,5 +52,6 @@ kubernetes:
     config: {}
       # mode: 'ipvs'
   networking:
-    service_subnet: "10.254.0.0/24,fd90:cca6:9762:96::/108"
-    pod_subnet: "10.244.0.0/16,fd49:d591:8c7e::/48"
+    service_subnet: "10.253.0.0/24,fd90:cca6:9762:96::/108"
+    pod_subnet: "10.243.0.0/16,fd49:d591:8c7e::/48"
+    dns_domain: 'unstable.cluster'

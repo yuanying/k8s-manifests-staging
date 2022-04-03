@@ -4,36 +4,34 @@ set -eu
 export LC_ALL=C
 ROOT=$(dirname "${BASH_SOURCE}")
 
-# mkdir -p /etc/systemd/resolved.conf.d/
-#
-# cat <<EOF > /etc/systemd/resolved.conf.d/cluster.local.conf
-# [Resolve]
-# DNS=192.168.0.1
-# Domains=default.svc.cluster.local svc.cluster.local cluster.local
-# EOF
-rm -f /etc/systemd/resolved.conf.d/cluster.local.conf
-
-systemctl restart systemd-resolved
-
 cat << EOF > /etc/systemd/network/10-porka-dummy.netdev
 [NetDev]
 Name=porka-dummy01
 Kind=dummy
 EOF
 
+cat << EOF > /etc/systemd/network/20-porka-dummy.network
+[Match]
+Name=porka-dummy01
+
+[Network]
+Address=10.253.0.1/24
+EOF
+
 systemctl restart systemd-networkd
 
 cat <<EOF > /etc/systemd/system/cluster-dns.service
 [Unit]
-Description=Setup cluster.local DNS
+Description=Setup unstable.cluster DNS
 After=systemd-resolved.service
 Requires=systemd-resolved.service
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=resolvectl dns porka-dummy01 10.254.0.10
-ExecStart=resolvectl domain porka-dummy01 default.svc.cluster.local svc.cluster.local cluster.local
+ExecStartPre=resolvectl revert porka-dummy01
+ExecStart=resolvectl dns porka-dummy01 10.253.0.10
+ExecStart=resolvectl domain porka-dummy01 default.svc.unstable.cluster svc.unstable.cluster unstable.cluster
 
 [Install]
 WantedBy=multi-user.target

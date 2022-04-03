@@ -33,5 +33,5 @@ nodePortAddresses:
 oomScoreAdj: -999
 portRange: ''
 udpIdleTimeout: 250ms
-clusterCIDR: 10.244.0.0/16,fd49:d591:8c7e::/48
+clusterCIDR: 10.243.0.0/16,fd49:d591:8c7e::/48
 
