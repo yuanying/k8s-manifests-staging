@@ -11,7 +11,7 @@ CNI_VERSION="v1.0.1"
 mkdir -p /opt/cni/bin
 curl -L "https://github.com/containernetworking/plugins/releases/download/${CNI_VERSION}/cni-plugins-linux-${architecture}-${CNI_VERSION}.tgz" | tar -C /opt/cni/bin -xz
 
-RELEASE="v1.22.8"
+RELEASE="v1.23.5"
 
 mkdir -p /opt/bin
 
@@ -38,7 +38,7 @@ rm -f /opt/bin/etcdctl
 mv ${ETCD_TMP}/etcdctl /opt/bin/etcdctl-${ETCD_VER}
 ln -s /opt/bin/etcdctl-${ETCD_VER} /opt/bin/etcdctl
 
-CRICTL_VER="v1.22.0"
+CRICTL_VER="v1.23.0"
 CRICTL_URL=https://github.com/kubernetes-sigs/cri-tools/releases/download/${CRICTL_VER}/crictl-${CRICTL_VER}-linux-${architecture}.tar.gz
 CRICTL_TMP=$(mktemp -d)
 curl -L ${CRICTL_URL} -o ${CRICTL_TMP}/crictl.tar.gz
