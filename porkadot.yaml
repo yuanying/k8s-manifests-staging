@@ -21,7 +21,7 @@ bootstrap:
   node:
     hostname: 192.168.1.95
 
-lb:
+addons:
   metallb:
     config: |
       address-pools:
@@ -30,13 +30,11 @@ lb:
         addresses:
         - 192.168.1.96-192.168.1.99
         - 2405:6581:8580:301:face:b00c::/96
+  flannel:
+    backend: host-gw
 
 connection:
   user: ubuntu
-
-cni:
-  flannel:
-    backend: host-gw
 
 etcd: {}
   # image_tag: v3.4.3-arm64

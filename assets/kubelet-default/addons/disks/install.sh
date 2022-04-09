@@ -28,4 +28,5 @@ WantedBy=multi-user.target
 EOF
     systemctl daemon-reload
     systemctl enable var-lib-longhorn.mount
+    systemctl start var-lib-longhorn.mount
 fi
