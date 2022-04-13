@@ -1,3 +1,7 @@
+labels:
+- pairs:
+    'app.unstable.cloud': 'kube-prometheus'
+
 resources:
 - ../base/kube-prometheus/
 
@@ -9,7 +13,7 @@ configMapGenerator:
   namespace: monitoring
   behavior: merge
   literals:
-  - DOMAIN=unstable.cloud
+  - DOMAIN=leaping.dev
 
 secretGenerator:
 - name: alertmanager-main
