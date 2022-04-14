@@ -1,4 +1,0 @@
-[
-  {"op": "replace", "path": "/spec/rules/0/host", "value": "kuard.unstable.cloud"},
-  {"op": "replace", "path": "/spec/tls/0/hosts/0", "value": "kuard.unstable.cloud"}
-]
