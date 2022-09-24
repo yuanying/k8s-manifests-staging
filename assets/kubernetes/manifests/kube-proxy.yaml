@@ -78,13 +78,13 @@ data:
       minSyncPeriod: 0s
       scheduler: ''
       syncPeriod: 30s
-    metricsBindAddress: 0.0.0.0:10249
+    metricsBindAddress: 127.0.0.1:10249
     mode: iptables
     nodePortAddresses: 
     oomScoreAdj: -999
     portRange: ''
     udpIdleTimeout: 250ms
-    clusterCIDR: 10.243.0.0/16,fd49:d591:8c7e::/48
+    clusterCIDR: 10.243.0.0/16
 
   kubeconfig.conf: |
     apiVersion: v1
@@ -92,7 +92,7 @@ data:
     clusters:
     - cluster:
         certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        server: https://192.168.1.96:6443
+        server: https://k8s.vms.svc.fraction.cluster:6443
       name: default
     contexts:
     - context:

@@ -12,9 +12,9 @@ ExecStart=/opt/bin/kubelet \
     --config=/var/lib/kubelet/config.yaml \
     --network-plugin=cni \
     --pod-infra-container-image=k8s.gcr.io/pause:3.4.1 \
-    --hostname-override=node-bootstrap.staging.vms.svc.fraction.cluster \
-    --node-labels= \
-    --register-with-taints= \
+    --hostname-override=node-cp02.staging.vms.svc.fraction.cluster \
+    --node-labels=k8s.unstable.cloud/master,etcd.unstable.cloud/member=node92 \
+    --register-with-taints=node-role.kubernetes.io/master=:NoSchedule \
     --resolv-conf=/run/systemd/resolve/resolv.conf
 Restart=always
 StartLimitInterval=0

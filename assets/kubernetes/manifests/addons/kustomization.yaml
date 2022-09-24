@@ -1,7 +1,6 @@
 resources:
 - flannel
 - coredns
-- metallb
 - kubelet-rubber-stamp
 - storage-version-migrator
 

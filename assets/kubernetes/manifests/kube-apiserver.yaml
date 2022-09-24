@@ -52,7 +52,7 @@ spec:
         - --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
         - --etcd-certfile=/etc/kubernetes/pki/etcd/etcd-client.crt
         - --etcd-keyfile=/etc/kubernetes/pki/etcd/etcd-client.key
-        - --etcd-servers=https://192.168.1.91:2379,https://192.168.1.92:2379,https://192.168.1.93:2379
+        - --etcd-servers=https://node-cp01.staging.vms.svc.fraction.cluster:2379,https://node-cp02.staging.vms.svc.fraction.cluster:2379,https://node-cp03.staging.vms.svc.fraction.cluster:2379
         - --kubelet-certificate-authority=/etc/kubernetes/pki/kubernetes/ca.crt
         - --kubelet-client-certificate=/etc/kubernetes/pki/kubernetes/kubelet-client.crt
         - --kubelet-client-key=/etc/kubernetes/pki/kubernetes/kubelet-client.key
@@ -68,7 +68,7 @@ spec:
         - --service-account-issuer=https://kubernetes.default.svcunstable.cluster
         - --service-account-key-file=/etc/kubernetes/pki/kubernetes/sa.pub
         - --service-account-signing-key-file=/etc/kubernetes/pki/kubernetes/sa.key
-        - --service-cluster-ip-range=10.253.0.0/24,fd90:cca6:9762:96::/108
+        - --service-cluster-ip-range=10.253.0.0/24
         - --storage-backend=etcd3
         - --tls-cert-file=/etc/kubernetes/pki/kubernetes/apiserver.crt
         - --tls-private-key-file=/etc/kubernetes/pki/kubernetes/apiserver.key

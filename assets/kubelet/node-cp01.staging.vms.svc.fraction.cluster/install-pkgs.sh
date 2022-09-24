@@ -42,7 +42,7 @@ net.bridge.bridge-nf-call-iptables  = 1
 EOF
 
 cat <<EOF > /etc/iscsi/initiatorname.iscsi
-InitiatorName=iqn.2020-04.cloud.unstable:node-bootstrap.staging.vms.svc.fraction.cluster
+InitiatorName=iqn.2020-04.cloud.unstable:node-cp01.staging.vms.svc.fraction.cluster
 EOF
 
 systemctl restart iscsid.service

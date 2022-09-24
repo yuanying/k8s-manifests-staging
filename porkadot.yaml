@@ -1,35 +1,32 @@
 nodes:
-  192.168.1.91:
+  node-cp01.staging.vms.svc.fraction.cluster:
     labels:
       "k8s.unstable.cloud/master":
       "etcd.unstable.cloud/member": node91
     taints:
       "node-role.kubernetes.io/master": ":NoSchedule"
-  192.168.1.92:
+  node-cp02.staging.vms.svc.fraction.cluster:
     labels:
       "k8s.unstable.cloud/master":
       "etcd.unstable.cloud/member": node92
     taints:
       "node-role.kubernetes.io/master": ":NoSchedule"
-  192.168.1.93:
+  node-cp03.staging.vms.svc.fraction.cluster:
     labels:
+      "k8s.unstable.cloud/master":
       "etcd.unstable.cloud/member": node93
-  192.168.1.94:
-  192.168.1.95:
+    taints:
+      "node-role.kubernetes.io/master": ":NoSchedule"
+  node-01.staging.vms.svc.fraction.cluster:
+  node-02.staging.vms.svc.fraction.cluster:
+  node-03.staging.vms.svc.fraction.cluster:
 
 bootstrap:
   node:
-    hostname: 192.168.1.95
+    hostname: node-bootstrap.staging.vms.svc.fraction.cluster
 
 addons:
-  metallb:
-    config: |
-      address-pools:
-      - name: default
-        protocol: layer2
-        addresses:
-        - 192.168.1.96-192.168.1.99
-        - 2405:6581:8580:301:face:b00c::/96
+  enabled: [flannel, coredns, kubelet-rubber-stamp, storage-version-migrator]
   flannel:
     backend: host-gw
 
@@ -44,12 +41,14 @@ etcd: {}
 
 kubernetes:
   cluster_name: unstable
-  control_plane_endpoint: '192.168.1.96:6443'
+  control_plane_endpoint: 'k8s.vms.svc.fraction.cluster:6443'
 
   proxy:
     config: {}
       # mode: 'ipvs'
   networking:
-    service_subnet: "10.253.0.0/24,fd90:cca6:9762:96::/108"
-    pod_subnet: "10.243.0.0/16,fd49:d591:8c7e::/48"
+    service_subnet: "10.253.0.0/24"
+    pod_subnet: "10.243.0.0/16"
+    # service_subnet: "10.253.0.0/24,fd90:cca6:9762:96::/108"
+    # pod_subnet: "10.243.0.0/16,fd49:d591:8c7e::/48"
     dns_domain: 'unstable.cluster'

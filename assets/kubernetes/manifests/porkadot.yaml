@@ -11,7 +11,7 @@ spec:
   selector:
     app.kubernetes.io/component: kube-apiserver
     app.kubernetes.io/managed-by: porkadot
-  loadBalancerIP: 192.168.1.96
+  loadBalancerIP: k8s.vms.svc.fraction.cluster
   ports:
   - name: https
     port: 6443
@@ -56,7 +56,7 @@ data:
     clusters:
     - name: local
       cluster:
-        server: https://192.168.1.96:6443
+        server: https://k8s.vms.svc.fraction.cluster:6443
         certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
     users:
     - name: service-account

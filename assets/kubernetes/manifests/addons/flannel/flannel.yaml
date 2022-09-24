@@ -126,8 +126,6 @@ data:
   net-conf.json: |
     {
       "Network": "10.243.0.0/16",
-      "EnableIPv6": true,
-      "IPv6Network": "fd49:d591:8c7e::/48",
       "Backend": {
         "Type": "host-gw"
       }
